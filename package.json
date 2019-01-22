@@ -1,0 +1,14 @@
+{
+  "name": "flixcheck-javascript-sdk",
+  "version": "0.9",
+  "description": "Flixcheck JavaScript SDK",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Denkpark GmbH",
+  "license": "MIT",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}
