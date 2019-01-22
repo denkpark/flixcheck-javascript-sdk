@@ -6,11 +6,11 @@ Welcome to the [Flixcheck](https://www.flixcheck.de) JavaScript SDK!
 
 ### 1. Install the library
 
-`npm install xxx`
+`npm install flixcheck-javascript-sdk`
 
 ### 2. Require the module
 
-`const flixcheck = require("xxx");`
+`const flixcheck = require("flixcheck-javascript-sdk");`
 
 ### 3. Instantiate a new `FlixcheckClient`
 
