@@ -7,7 +7,9 @@ const testCheckId = process.env.FLIXCHECK_TEST_CHECK_ID;
 const testAccountId = process.env.FLIXCHECK_TEST_ACCOUNT_ID;
 const testFileId = process.env.FLIXCHECK_TEST_FILE_ID;
 
-const client = new flixcheck.FlixcheckClient(userId, apiKey);
+const client = new flixcheck.FlixcheckClient(userId, apiKey, {
+    endpoint: process.env.FLIXCHECK_TEST_ENDPOINT
+});
 
 async function test() {
     try {
@@ -35,6 +37,13 @@ async function test() {
         const fileBuffer = await client.getFile(testFileId);
         fs.writeFileSync(__dirname + "/file.pdf", fileBuffer);
 
+        /* Test reportError */
+        await client.reportError("Test-Error", testErrorStack, {
+            exampleMoreInfo1: true,
+            exampleMoreInfo2: "exampleValue",
+            exampleMoreInfo3: 123
+        });
+
     } catch (error) {
         throw error;
     }
@@ -48,3 +57,9 @@ test()
         console.error(error);
         process.exit(1);
     });
+
+
+
+const testErrorStack = `ERROR: Test-Error
+  at someFunction.js:45
+  at someOtherFunction.js:12`;
