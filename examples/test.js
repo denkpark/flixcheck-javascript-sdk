@@ -6,6 +6,7 @@ const apiKey = process.env.FLIXCHECK_TEST_API_KEY;
 const testCheckId = process.env.FLIXCHECK_TEST_CHECK_ID;
 const testAccountId = process.env.FLIXCHECK_TEST_ACCOUNT_ID;
 const testFileId = process.env.FLIXCHECK_TEST_FILE_ID;
+const testFileImageId = process.env.FLIXCHECK_TEST_FILE_IMAGE_ID;
 
 const client = new flixcheck.FlixcheckClient(userId, apiKey, {
     endpoint: process.env.FLIXCHECK_TEST_ENDPOINT
@@ -16,7 +17,7 @@ async function test() {
 
         /* Test getCheck */
         const check = await client.getCheck(testCheckId);
-        console.log(check.subject);
+        console.log("Check subject", check.subject);
 
         /* Test getCheckPdf */
         const pdfBuffer = await client.getCheckPdf(testCheckId);
@@ -27,11 +28,15 @@ async function test() {
             notes: "Great!"
         });
         const checkAfterUpdate = await client.getCheck(testCheckId);
-        console.log(checkAfterUpdate.notes);
+        console.log("Check notes (should be \"Great!\")", checkAfterUpdate.notes);
 
         /* Test getAccount */
         const account = await client.getAccount(testAccountId);
-        console.log(account.company.name);
+        console.log("Company name", account.company.name);
+
+        /* Test getFileMetadata */
+        const fileMetadata = await client.getFileMetadata(testFileImageId);
+        console.log("File metadata", fileMetadata);
 
         /* Test getFile */
         const fileBuffer = await client.getFile(testFileId);
@@ -51,7 +56,7 @@ async function test() {
 
 test()
     .then(() => {
-        process.exit(0);
+        // process.exit(0);
     })
     .catch((error) => {
         console.error(error);
