@@ -15,6 +15,32 @@ const client = new flixcheck.FlixcheckClient(userId, apiKey, {
 async function test() {
     try {
 
+        /* Test createCheck */
+        const createCheckAnswer = await client.createCheck({
+            recipient: {
+                gender: "male",
+                firstname: "John",
+                lastname: "Smith",
+                mobile: "0049 170 123456789"
+            },
+            subject: "Test Subject",
+            sendBy: "sms",
+            elements: [
+                {
+                    id: "1",
+                    type: "question",
+                    subtype: "number",
+                    options: {
+                        text: "Please enter your favourite number."
+                    }
+                }
+            ]
+        }, {
+            resend: true,
+            resendAfterDays: 7
+        });
+        console.log("Check created", createCheckAnswer);
+
         /* Test getCheck */
         const check = await client.getCheck(testCheckId);
         console.log("Check subject", check.subject);
