@@ -68,6 +68,10 @@ async function test() {
         const fileBuffer = await client.getFile(testFileId);
         fs.writeFileSync(__dirname + "/file.pdf", fileBuffer);
 
+        /* Test getToken */
+        const tokenInfo = await client.getToken(userId);
+        console.log("Open: " + tokenInfo.loginUrl);
+
         /* Test reportError */
         await client.reportError("Test-Error", testErrorStack, {
             exampleMoreInfo1: true,
