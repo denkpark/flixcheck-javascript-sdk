@@ -33,6 +33,22 @@ async function test() {
                     options: {
                         text: "Please enter your favourite number."
                     }
+                },
+                {
+                    id: "2",
+                    type: "question",
+                    subtype: "text",
+                    options: {
+                        text: "Please enter your favourite color."
+                    }
+                },
+                {
+                    id: "3",
+                    type: "question",
+                    subtype: "text",
+                    options: {
+                        text: "Please enter your favourite city."
+                    }
                 }
             ]
         }, {
@@ -40,14 +56,23 @@ async function test() {
             resendAfterDays: 7
         });
         console.log("Check created", createCheckAnswer);
+        const createdCheckId = createCheckAnswer.id;
 
         /* Test getCheck */
         const check = await client.getCheck(testCheckId);
         console.log("Check subject", check.subject);
 
         /* Test getCheckPdf */
-        const pdfBuffer = await client.getCheckPdf(testCheckId);
-        fs.writeFileSync(__dirname + "/check.pdf", pdfBuffer);
+        const pdfBuffer1 = await client.getCheckPdf(testCheckId);
+        fs.writeFileSync(__dirname + "/check.pdf", pdfBuffer1);
+
+        /* Test getCheckPdf with options */
+        const pdfBuffer2 = await client.getCheckPdf(createdCheckId, {
+            withEvents: true,
+            includeElementIds: ["1", "2"],
+            hideMetadata: true
+        });
+        fs.writeFileSync(__dirname + "/check-options.pdf", pdfBuffer2);
 
         /* Test putCheck */
         await client.putCheck(testCheckId, {

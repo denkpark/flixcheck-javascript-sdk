@@ -1,6 +1,6 @@
 {
   "name": "flixcheck-javascript-sdk",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "description": "Flixcheck JavaScript SDK",
   "main": "index.js",
   "scripts": {
